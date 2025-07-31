@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: audiotranscriber
+    runtime: docker
+    buildCommand: ./mvnw clean install || mvn clean install
+    startCommand: java -jar target/audiotranscriber-0.0.1-SNAPSHOT.jar
+    plan: free
