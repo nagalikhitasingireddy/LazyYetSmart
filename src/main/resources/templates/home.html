@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LAZY_YET_SMART</title>
+
+  <!-- Orbitron Font, Bootstrap, FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d6c5ef.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0f1c;
+      color: #00ffcc;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* 🖼 Fullscreen Hero */
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .hero-section a {
+      font-size: 20px;
+      padding: 12px 30px;
+      background-color: #00ffcc;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      font-size: 18px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .main-content {
+      padding-top: 80px;
+    }
+
+    /* 💳 Card Design */
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .card-box {
+      width: 90%;
+      max-width: 800px;
+      background: rgba(0, 255, 204, 0.07);
+      border: 1px solid #00ffcc;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffcc44;
+      padding: 20px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .card-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-box img {
+      width: 120px;
+      border-radius: 15px;
+    }
+
+    .card-text {
+      flex: 1;
+    }
+
+    footer {
+      background: #06111b;
+      color: #00ffcc;
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 16px;
+      margin-top: 80px;
+      border-top: 1px solid #00ffcc;
+    }
+
+    footer a {
+      color: #00c7aa;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+
+  <!-- 💫 Full-screen Hero -->
+  <section class="hero-section">
+    <h1>Welcome to LAZY_YET_SMART</h1>
+    <a href="/realWeb">Go to Real Website</a>
+    <div class="scroll-indicator"><h2>↓ Scroll for more info ↓</h2></div>
+  </section>
+
+  <!-- 📦 Cards Section -->
+  <div class="container main-content" id="mainContent">
+    <div class="card-row">
+      <div class="card-box">
+        <img src="https://i.imgur.com/NYH2gFy.png" alt="Tired student">
+        <div class="card-text">
+          <h4>😩 Tired of Long Talks?</h4>
+          <p>Speeches, classes, meetings—you’ve survived them all. Let's make the lazy genius move.</p>
+        </div>
+      </div>
+
+      <div class="card-box">
+        <div class="card-text">
+          <h4>🎙️ Record. Upload. Transcribe.</h4>
+          <p>Forget notes. Speak your mind, hit upload, and get clean transcripts instantly.</p>
+        </div>
+        <img src="https://i.imgur.com/QzEboQn.png" alt="Mic + upload">
+      </div>
+
+      <div class="card-box">
+        <img src="https://i.imgur.com/TaKO7gM.png" alt="Summary page">
+        <div class="card-text">
+          <h4>📖 Too Lazy to Read?</h4>
+          <p>Tap summarize and skip the fluff. It's your shortcut to smartness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🛜 Footer -->
+  <footer>
+    Created by <strong>Likhita</strong> |  
+    <a href="https://www.linkedin.com/in/likhita" target="_blank">LinkedIn Profile</a>
+  </footer>
+
+  <script>
+    // Particles background
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#00ffcc" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.3 },
+        "size": { "value": 3 },
+        "line_linked": { "enable": true, "distance": 150, "color": "#00ffcc", "opacity": 0.3, "width": 1 },
+        "move": { "enable": true, "speed": 2 }
+      },
+      "interactivity": { "events": { "onhover": { "enable": true, "mode": "repulse" } } }
+    });
+
+    // Animate cards when visible
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.card-box').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
