@@ -94,16 +94,30 @@ private ChatClient chatClient;
     	return "home";
     }
     @GetMapping("/summary")
-	public String getAnswer(Model model){
-		model.addAttribute("transcription",latestTranscription);
-		String message="summarize this total text,"+latestTranscription;
-		ChatResponse chatResponse=chatClient.prompt(message)
-				.call()
-				.chatResponse();
-		
-		System.out.println(chatResponse.getMetadata().getModel());
-		String response=chatResponse.getResult().getOutput().getText();
-		model.addAttribute("response", response);
+    public String getAnswer(Model model) {
+        model.addAttribute("transcription", latestTranscription);
+        String message = "summarize this total text," + latestTranscription;
+
+        try {
+            ChatResponse chatResponse = chatClient.prompt(message).call().chatResponse();
+            String response = chatResponse.getResult().getOutput().getText();
+            model.addAttribute("response", response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", " I wanted to give you a cool AI summarization tool, but turns out... LLaMA’s got a big appetite for RAM 🐑💻. This beast doesn’t even blink until it gets what it wants — LOTS of memory.\r\n"
+            		+ "\r\n"
+            		+ "And why LLaMA, you ask?\r\n"
+            		+ "Well... let's just say \"empty pockets teach the best lessons\" 😅💸. OpenAI is amazing, but my wallet looked at the pricing and fainted on the spot. So I went the free and open-source route like a true broke techie with ambition.\r\n"
+            		+ "\r\n"
+            		+ "✨ BUT good news!\r\n"
+            		+ "If you download the full code and install Ollama (the backstage muscle behind the scenes), everything should run like butter 🍞🔥. Just feed your system enough RAM and boom — summarization magic unlocked.\r\n"
+            		+ "\r\n"
+            		+ "So go ahead, give it a shot! Trust me, it's worth the extra clicks. And hey — if you're also running low on funds, you’ll feel this journey in your soul. 😂💀\r\n"
+            		+ "\r\n"
+            		+ "Team Broke, but Building. 💻💪");
+        }
+
         return "index";
-	}
+    }
+
 }
