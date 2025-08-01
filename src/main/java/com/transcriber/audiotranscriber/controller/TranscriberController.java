@@ -21,11 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class TranscriberController {
-private ChatClient chatClient;
-	
-	public TranscriberController(OllamaChatModel chatModel) {
-		this.chatClient=ChatClient.create(chatModel);
-	}
+//private ChatClient chatClient;
+//	
+//	public TranscriberController(OllamaChatModel chatModel) {
+//		this.chatClient=ChatClient.create(chatModel);
+//	}
 
 	private String latestTranscription = "";  // store transcription for summarizing
 
@@ -98,12 +98,12 @@ private ChatClient chatClient;
         model.addAttribute("transcription", latestTranscription);
         String message = "summarize this total text," + latestTranscription;
 
-        try {
-            ChatResponse chatResponse = chatClient.prompt(message).call().chatResponse();
-            String response = chatResponse.getResult().getOutput().getText();
-            model.addAttribute("response", response);
-        } catch (Exception e) {
-            e.printStackTrace();
+//        try {
+//            ChatResponse chatResponse = chatClient.prompt(message).call().chatResponse();
+//            String response = chatResponse.getResult().getOutput().getText();
+//            model.addAttribute("response", response);
+//        } catch (Exception e) {
+//            e.printStackTrace();
             model.addAttribute("error", " I wanted to give you a cool AI summarization tool, but turns out... LLaMA’s got a big appetite for RAM 🐑💻. This beast doesn’t even blink until it gets what it wants — LOTS of memory.\r\n"
             		+ "\r\n"
             		+ "And why LLaMA, you ask?\r\n"
@@ -115,7 +115,7 @@ private ChatClient chatClient;
             		+ "So go ahead, give it a shot! Trust me, it's worth the extra clicks. And hey — if you're also running low on funds, you’ll feel this journey in your soul. 😂💀\r\n"
             		+ "\r\n"
             		+ "Team Broke, but Building. 💻💪");
-        }
+//        }
 
         return "index";
     }
